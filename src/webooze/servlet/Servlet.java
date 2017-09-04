@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import webooze.controle.AlterarCommand;
-import webooze.controle.BebidaVH;
+import webooze.controle.CategoriaVH;
 import webooze.controle.ConsultarCommand;
 import webooze.controle.ExcluirCommand;
 import webooze.controle.ICommand;
@@ -34,7 +34,9 @@ public class Servlet extends HttpServlet {
 		String contextoApp = "/webooze";
 		
 		vhs = new HashMap<String, IViewHelper>();
-		vhs.put(contextoApp + "/home", new BebidaVH());
+		vhs.put(contextoApp + "/home", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaForm", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaSalvar", new CategoriaVH());
 	}
 		
 	@Override
@@ -42,6 +44,7 @@ public class Servlet extends HttpServlet {
 		String operacao = request.getParameter("operacao");
 		Object obj = null;
 		String uri = request.getRequestURI();
+		IViewHelper vh2 = vhs.get("/webooze/categoriaForm");
 		IViewHelper vh = vhs.get(uri);
 		if(vh != null) {
 			if(operacao != null && !operacao.equals("")) {
