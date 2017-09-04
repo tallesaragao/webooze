@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header>
-	<nav id="navbar" role="navigation" class="navbar navbar-default">
+	<nav id="navbar" role="navigation" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header navbar-cabecalho">
 				<a href="#" class="navbar-brand navbar-logo">
@@ -17,7 +17,7 @@
 			</div>
 			<div id="menu-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="clienteLista">Categoria</a></li>
+					<li><a href="categoriaList">Categoria</a></li>
 					<li><a href="funcionarioListar">Bebida</a></li>
 				</ul>
 			</div>

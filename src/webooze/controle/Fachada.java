@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import webooze.dao.CategoriaDAO;
 import webooze.dao.IDAO;
+import webooze.modelo.Categoria;
 import webooze.modelo.EntidadeDominio;
 import webooze.negocio.IStrategy;
 import webooze.negocio.impl.ComplementarDtCadastro;
+import webooze.negocio.impl.ValidarCamposCategoria;
 
 public class Fachada implements IFachada {
 
@@ -22,15 +25,17 @@ public class Fachada implements IFachada {
 
 	public Fachada() {
 		ComplementarDtCadastro compDtCad = new ComplementarDtCadastro();
+		ValidarCamposCategoria valCampCat = new ValidarCamposCategoria();
 
-		List<IStrategy> lSalvarFunc = new ArrayList<IStrategy>();
-		lSalvarFunc.add(compDtCad);
+		List<IStrategy> lSalvarCat = new ArrayList<IStrategy>();
+		lSalvarCat.add(compDtCad);
+		lSalvarCat.add(valCampCat);
 		
-		List<IStrategy> lAlterarFunc = new ArrayList<IStrategy>();
+		List<IStrategy> lAlterarCat = new ArrayList<IStrategy>();
 		
-		List<IStrategy> lExcluirFunc = new ArrayList<IStrategy>();
+		List<IStrategy> lExcluirCat = new ArrayList<IStrategy>();
 		
-		List<IStrategy> lConsultarFunc = new ArrayList<IStrategy>();
+		List<IStrategy> lConsultarCat = new ArrayList<IStrategy>();
 		
 		List<IStrategy> lSalvarCliente = new ArrayList<IStrategy>();
 		lSalvarCliente.add(compDtCad);
@@ -41,11 +46,11 @@ public class Fachada implements IFachada {
 		
 		List<IStrategy> lConsultarCliente = new ArrayList<IStrategy>();
 
-		Map<String, List<IStrategy>> contextoFunc = new HashMap<String, List<IStrategy>>();
-		contextoFunc.put(SALVAR, lSalvarFunc);
-		contextoFunc.put(ALTERAR, lAlterarFunc);
-		contextoFunc.put(EXCLUIR, lExcluirFunc);
-		contextoFunc.put(CONSULTAR, lConsultarFunc);
+		Map<String, List<IStrategy>> contextoCat = new HashMap<String, List<IStrategy>>();
+		contextoCat.put(SALVAR, lSalvarCat);
+		contextoCat.put(ALTERAR, lAlterarCat);
+		contextoCat.put(EXCLUIR, lExcluirCat);
+		contextoCat.put(CONSULTAR, lConsultarCat);
 		
 		Map<String, List<IStrategy>> contextoCli = new HashMap<String, List<IStrategy>>();
 		contextoCli.put(SALVAR, lSalvarCliente);
@@ -54,8 +59,10 @@ public class Fachada implements IFachada {
 		contextoCli.put(CONSULTAR, lConsultarCliente);
 
 		requisitos = new HashMap<String, Map<String, List<IStrategy>>>();
+		requisitos.put(Categoria.class.getName(), contextoCat);
 		
 		daos = new HashMap<String, IDAO>();
+		daos.put(Categoria.class.getName(), new CategoriaDAO());
 	}
 
 	@Override

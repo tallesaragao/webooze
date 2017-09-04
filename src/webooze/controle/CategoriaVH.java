@@ -13,11 +13,15 @@ public class CategoriaVH implements IViewHelper {
 
 	@Override
 	public EntidadeDominio getEntidade(HttpServletRequest request) {
+		String busca = request.getParameter("busca");
 		String nome = request.getParameter("nome");
 		String diasValidade = request.getParameter("diasValidade");
 		Categoria categoria = new Categoria();
 		categoria.setNome(nome);
 		categoria.setDiasValidade(Integer.valueOf(diasValidade));
+		if(busca != null || !busca.equals("")) {
+			categoria.setNome(busca);
+		}
 		return (EntidadeDominio) categoria;
 	}
 
@@ -34,6 +38,23 @@ public class CategoriaVH implements IViewHelper {
 		}
 		if(uri.equals(contexto + "/categoriaForm")) {
 			request.getRequestDispatcher("WEB-INF/jsp/bebida/form.jsp").forward(request, response);	
+		}
+		if(uri.equals(contexto + "/categoriaList")) {
+			request.getRequestDispatcher("WEB-INF/jsp/bebida/list.jsp").forward(request, response);	
+		}
+		if(uri.equals(contexto + "/categoriaSalvar")) {
+			if(object == null) {
+				String sucesso = "Categoria cadastrada com sucesso.";
+				request.setAttribute("sucesso", sucesso);
+				request.getRequestDispatcher("WEB-INF/jsp/bebida/list.jsp").forward(request, response);
+				return;
+			}
+			String mensagem = (String) object;
+			String[] mensagens = mensagem.split(":");
+			Categoria categoria = (Categoria) this.getEntidade(request);
+			request.setAttribute("cliente", categoria);
+			request.setAttribute("mensagens", mensagens);
+			request.getRequestDispatcher("WEB-INF/jsp/bebida/form.jsp").forward(request, response);
 		}
 		
 	}

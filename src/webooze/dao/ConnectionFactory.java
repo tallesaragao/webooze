@@ -15,7 +15,7 @@ public class ConnectionFactory {
 		try {
 			Context initialContext = new InitialContext();
 			Context envContext = (Context) initialContext.lookup("java:/comp/env");
-			dataSource = (DataSource) envContext.lookup("jdbc/hmapp");
+			dataSource = (DataSource) envContext.lookup("jdbc/webooze");
 		} catch (NamingException e) {
 			throw new RuntimeException(e);
 		}
