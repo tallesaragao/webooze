@@ -37,7 +37,11 @@ public class Servlet extends HttpServlet {
 		vhs.put(contextoApp + "/home", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaForm", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaList", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaEdit", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaSalvar", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaConsultar", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaAlterar", new CategoriaVH());
+		vhs.put(contextoApp + "/categoriaExcluir", new CategoriaVH());
 	}
 		
 	@Override
@@ -49,7 +53,7 @@ public class Servlet extends HttpServlet {
 		if(vh != null) {
 			if(operacao != null && !operacao.equals("")) {
 				EntidadeDominio entidade = vh.getEntidade(request);
-				ICommand cmd = commands.get(operacao.toUpperCase());
+				ICommand cmd = commands.get(operacao);
 				obj = cmd.execute(entidade);
 			}
 			vh.setView(obj, request, response);

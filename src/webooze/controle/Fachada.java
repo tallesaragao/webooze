@@ -32,31 +32,17 @@ public class Fachada implements IFachada {
 		lSalvarCat.add(valCampCat);
 		
 		List<IStrategy> lAlterarCat = new ArrayList<IStrategy>();
+		lAlterarCat.add(valCampCat);
 		
 		List<IStrategy> lExcluirCat = new ArrayList<IStrategy>();
 		
 		List<IStrategy> lConsultarCat = new ArrayList<IStrategy>();
-		
-		List<IStrategy> lSalvarCliente = new ArrayList<IStrategy>();
-		lSalvarCliente.add(compDtCad);
-		
-		List<IStrategy> lAlterarCliente = new ArrayList<IStrategy>();
-		
-		List<IStrategy> lExcluirCliente = new ArrayList<IStrategy>();
-		
-		List<IStrategy> lConsultarCliente = new ArrayList<IStrategy>();
 
 		Map<String, List<IStrategy>> contextoCat = new HashMap<String, List<IStrategy>>();
 		contextoCat.put(SALVAR, lSalvarCat);
 		contextoCat.put(ALTERAR, lAlterarCat);
 		contextoCat.put(EXCLUIR, lExcluirCat);
 		contextoCat.put(CONSULTAR, lConsultarCat);
-		
-		Map<String, List<IStrategy>> contextoCli = new HashMap<String, List<IStrategy>>();
-		contextoCli.put(SALVAR, lSalvarCliente);
-		contextoCli.put(ALTERAR, lAlterarCliente);
-		contextoCli.put(EXCLUIR, lExcluirCliente);
-		contextoCli.put(CONSULTAR, lConsultarCliente);
 
 		requisitos = new HashMap<String, Map<String, List<IStrategy>>>();
 		requisitos.put(Categoria.class.getName(), contextoCat);

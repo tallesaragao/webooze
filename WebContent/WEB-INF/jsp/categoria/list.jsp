@@ -15,34 +15,42 @@
 	<div class="container">
 		<h1 class="page-header titulo">Lista de categorias</h1>
 		<c:if test="${sucesso != null}">
-			<div class="alert alert-success alert-dismissible">
-				<span class="glyphicon glyphicon-ok"></span>
-				<strong>${sucesso}.</strong>				
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+			<div class="row">
+				<div class="col-md-5">
+					<div class="alert alert-success alert-dismissible">
+						<span class="glyphicon glyphicon-ok"></span>
+						<strong>${sucesso}.</strong>				
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
 			</div>
 		</c:if>
 			
 		<c:if test="${erro != null}">
-			<div class="alert alert-danger alert-dismissible">
-				<span class="glyphicon glyphicon-alert"></span>
-				<strong>${erro}.</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+			<div class="row">
+				<div class="col-md-5">
+					<div class="alert alert-danger alert-dismissible">
+						<span class="glyphicon glyphicon-alert"></span>
+						<strong>${erro}.</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</div>
 			</div>
 		</c:if>
 		<form action="#" method="post">
 			<div class="row pesquisa">
 				<div class="col-xs-12">
 					<div class="row">
-						<div class="col-xs-10 col-md-7">
+						<div class="col-xs-10 col-sm-6 col-md-4">
 							<div class="input-group input-group-md">
 								<input type="text" name="busca" placeholder="Faça sua busca" class="form-control"/>
 								<div class="input-group-btn">
 									<button type="submit" class="btn btn-md btn-primary btn-icone"
-									name="operacao" value="Consultar" formaction="categoriaConsultar">
+									name="operacao" value="CONSULTAR" formaction="categoriaConsultar">
 										<span class="glyphicon glyphicon-search"></span>
 									</button>
 								</div>
@@ -61,13 +69,14 @@
 			<c:if test="${not empty consulta}">
 				<div class="row">
 					<div class="table-responsive tabela-clientes">
-						<div class="col-sm-11 col-md-8">
+						<div class="col-sm-11 col-sm-7 col-md-5">
 							<table class="table table-striped table-condensed">
 								<thead>
 									<tr>
 										<th>NOME</th>
+										<th>VALIDADE</th>
 										<th>
-											<span class="glyphicon glyphicon-cog icone-engrenagem"></span>
+											<span class="glyphicon glyphicon-cog icone-engrenagem"></span> AÇÕES
 										</th>
 									</tr>
 								</thead>
@@ -75,10 +84,17 @@
 									<c:forEach items="${consulta}" var="c">
 										<tr>
 											<td>${c.nome}</td>
+											<td>${c.diasValidade} dias</td>
 											<td>
-												<button type="submit" name="view" data-toggle="tooltip" title="Visualizar" 
-												class="btn btn-sm btn-default btn-icone" method="get" formaction="clienteView?operacao=Consultar&id=${c.id}">
-													<span class="glyphicon glyphicon-eye-open"></span>
+												<button type="submit" data-toggle="tooltip" title="Editar"
+												class="btn btn-sm btn-default btn-icone" method="get"
+												formaction="categoriaEdit?operacao=CONSULTAR&id=${c.id}">
+													<span class="glyphicon glyphicon-pencil"></span>
+												</button>
+												<button type="submit" name="operacao" method="get" data-toggle="tooltip"
+												title="Excluir" value="EXCLUIR"	onclick="return excluir()"
+												class="btn btn-sm btn-danger botao-excluir btn-icone" formaction="categoriaExcluir?id=${c.id}">
+													<span class="glyphicon glyphicon-trash"></span>
 												</button>
 											</td>
 										</tr>
@@ -95,16 +111,6 @@
 	<script src="resources/js/jquery-3.1.1.js"></script>
 	<script src="resources/bootstrap/js/bootstrap.js"></script>
 	<script src="resources/js/jquery.mask.js"></script>
-	<script src="resources/js/clienteForm.js"></script>
-	<script>
-		$(document).ready(function(){
-	   		$('[data-toggle="tooltip"]').tooltip();   
-		});
-		function teste(event) {
-			if (confirm("Deseja realmente excluir?") == false) {
-				return false;
-			}
-		}
-	</script>
+	<script src="resources/js/webooze.js"></script>
 </body>
 </html>

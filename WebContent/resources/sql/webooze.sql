@@ -30,7 +30,7 @@ CREATE TABLE `categoria` (
   `nome` varchar(50) NOT NULL,
   `dias_validade` int(11) NOT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'2017-09-04','Refrigerante',150),(2,'2017-09-04','Cerveja',180),(3,'2017-09-04','Energético',125);
+INSERT INTO `categoria` VALUES (1,'2017-09-04','Refrigerante',155),(2,'2017-09-04','Cerveja',180),(3,'2017-09-04','Energético',125),(4,'2017-09-05','Vinho',1100);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-04 12:45:49
+-- Dump completed on 2017-09-05 12:29:51

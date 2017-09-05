@@ -13,7 +13,7 @@ public class ValidarCamposCategoria implements IStrategy {
 		if(categoria.getNome() == null || categoria.getNome().equals("")) {
 			sb.append("Nome da categoria é obrigatório:");
 		}
-		if(categoria.getDiasValidade() < 0) {
+		if(categoria.getDiasValidade() <= 0) {
 			sb.append("Dias de validade inválidos:");
 		}
 		if(sb.length() > 0) {
