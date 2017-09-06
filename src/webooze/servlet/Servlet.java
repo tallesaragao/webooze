@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import webooze.controle.AlterarCommand;
+import webooze.controle.BebidaVH;
 import webooze.controle.CategoriaVH;
 import webooze.controle.ConsultarCommand;
 import webooze.controle.ExcluirCommand;
@@ -42,6 +43,7 @@ public class Servlet extends HttpServlet {
 		vhs.put(contextoApp + "/categoriaConsultar", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaAlterar", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaExcluir", new CategoriaVH());
+		vhs.put(contextoApp + "/bebidaForm", new BebidaVH());
 	}
 		
 	@Override
