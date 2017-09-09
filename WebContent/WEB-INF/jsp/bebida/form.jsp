@@ -52,7 +52,19 @@
 						value="${categoria.diasValidade}" class="form-control"/>
 					</div>
 				</div>
-			</div>				
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-md-4">
+					<div class="form-group">
+						<label for="categoria" class="control-label">Categorias</label>
+						<select name="categoria" class="form-control">
+							<c:forEach items="${categorias}" var="cat">
+								<option value="${cat.id}">${cat.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+			</div>			
 			<div class="row">
 				<c:choose>
 					<c:when test="${operacao eq 'ALTERAR'}">

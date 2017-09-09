@@ -75,6 +75,11 @@ public class CategoriaVH implements IViewHelper {
 			request.getRequestDispatcher("WEB-INF/jsp/categoria/form.jsp").forward(request, response);			
 		}
 		
+		if(uri.equals(contexto + "/bebidaForm")) {
+			BebidaVH bebidaVH = new BebidaVH();
+			bebidaVH.setView(object, request, response);
+		}
+		
 		if(uri.equals(contexto + "/categoriaForm")) {
 			request.getRequestDispatcher("WEB-INF/jsp/categoria/form.jsp").forward(request, response);	
 		}
