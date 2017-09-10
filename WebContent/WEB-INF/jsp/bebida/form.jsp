@@ -39,24 +39,22 @@
 		</c:if>
 		<form class="form" action="#" method="post">
 			<div class="row">
-				<div class="col-xs-9 col-sm-6 col-md-4">
+				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
 						<label for="nome" class="control-label">Nome</label>
-						<input type="text" name="nome" placeholder="Nome" value="${categoria.nome}" class="form-control"/>
+						<input type="text" name="nome" placeholder="Nome"
+						value="${bebida.nome}" class="form-control"/>
 					</div>
 				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">
+				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
-						<label for="diasValidade" class="control-label">Validade</label>
-						<input type="text" name="diasValidade" placeholder="Dias"
-						value="${categoria.diasValidade}" class="form-control"/>
+						<label for="dataFabricacao" class="control-label">Data de Fabricação</label>
+						<input type="date" name="dataFabricacao" class="form-control"/>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-md-4">
+				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
-						<label for="categoria" class="control-label">Categorias</label>
+						<label for="categoria" class="control-label">Categoria</label>
 						<select name="categoria" class="form-control">
 							<c:forEach items="${categorias}" var="cat">
 								<option value="${cat.id}">${cat.nome}</option>
@@ -64,20 +62,89 @@
 						</select>
 					</div>
 				</div>
-			</div>			
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-4">					
+					<div class="form-group">
+						<label for="fornecedor" class="control-label">Fornecedor</label>						
+						<input type="text" name="fornecedor" placeholder="Fornecedor"
+						value="${bebida.fornecedor}" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label for="fabricante" class="control-label">Fabricante</label>						
+						<input type="text" name="fabricante" placeholder="Fabricante"
+						value="${bebida.fabricante}" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label for="preco" class="control-label">Preço (R$)</label>						
+						<input type="number" step="0.01" name="preco" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-2">
+					<label for="radios" class="control-label">Alcoólica?</label>
+					<div name="radios" class="form-group">
+						<label class="radio-inline">
+							<input type="radio" name="alcoolica" value="1"/>Sim
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="alcoolica" value="0"/>Não
+						</label>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label for="teorAlcool" class="control-label">Teor Alcoólico (%)</label>						
+						<input type="number" step="any" name="teorAlcool" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-2">
+					<div class="form-group">
+						<label for="quantidadeAtual" class="control-label">Quantidade</label>						
+						<input type="number" name="quantidadeAtual" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-2">
+					<div class="form-group">
+						<label for="quantidadeMaxima" class="control-label">Quantidade Máxima</label>						
+						<input type="number" name="quantidadeMaxima" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-2">
+					<div class="form-group">
+						<label for="quantidadeMinima" class="control-label">Quantidade Minima</label>						
+						<input type="number" name="quantidadeMinima" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label for="ingredientes" class="control-label">Ingredientes</label>
+						<textarea name="ingredientes" rows="4" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>		
 			<div class="row">
 				<c:choose>
 					<c:when test="${operacao eq 'ALTERAR'}">
 						<input type="hidden" name="id" value="${categoria.id}"/>
 						<div class="form-group col-xs-1">
-							<button type="submit" name="operacao" value="ALTERAR" formaction="categoriaAlterar" class="btn btn-primary">
+							<button type="submit" name="operacao" value="ALTERAR"
+							formaction="bebidaAlterar" class="btn btn-primary">
 								Alterar
 							</button>
 						</div>					
 					</c:when>
 					<c:otherwise>
 						<div class="form-group col-xs-1">
-							<button type="submit" name="operacao" value="SALVAR" formaction="categoriaSalvar" class="btn btn-primary">
+							<button type="submit" name="operacao" value="SALVAR"
+							formaction="bebidaSalvar" class="btn btn-primary">
 								Salvar
 							</button>
 						</div>					
