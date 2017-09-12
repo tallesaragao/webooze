@@ -1,26 +1,31 @@
 package webooze.modelo;
 
 public class Estoque extends EntidadeDominio {
-	private int quantidadeAtual;
-	private int quantidadeMaxima;
-	private int quantidadeMinima;
-	
-	public int getQuantidadeAtual() {
+	private Long quantidadeAtual;
+	private Long quantidadeMaxima;
+	private Long quantidadeMinima;
+
+	public Long getQuantidadeAtual() {
 		return quantidadeAtual;
 	}
-	public void setQuantidadeAtual(int quantidadeAtual) {
+
+	public void setQuantidadeAtual(Long quantidadeAtual) {
 		this.quantidadeAtual = quantidadeAtual;
 	}
-	public int getQuantidadeMaxima() {
+
+	public Long getQuantidadeMaxima() {
 		return quantidadeMaxima;
 	}
-	public void setQuantidadeMaxima(int quantidadeMaxima) {
+
+	public void setQuantidadeMaxima(Long quantidadeMaxima) {
 		this.quantidadeMaxima = quantidadeMaxima;
 	}
-	public int getQuantidadeMinima() {
+
+	public Long getQuantidadeMinima() {
 		return quantidadeMinima;
 	}
-	public void setQuantidadeMinima(int quantidadeMinima) {
+
+	public void setQuantidadeMinima(Long quantidadeMinima) {
 		this.quantidadeMinima = quantidadeMinima;
 	}
 }

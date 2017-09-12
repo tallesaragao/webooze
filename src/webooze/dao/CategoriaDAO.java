@@ -82,6 +82,9 @@ public class CategoriaDAO implements IDAO {
 				sql += " and id_categoria = ?";
 			}
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			if(categoria.getNome() == null) {
+				categoria.setNome("");
+			}
 			ps.setString(1, "%" + categoria.getNome() + "%");
 			if(categoria.getId() != null) {
 				ps.setLong(2, categoria.getId());

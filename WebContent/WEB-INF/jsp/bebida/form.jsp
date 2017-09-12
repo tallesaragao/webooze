@@ -38,6 +38,7 @@
 			</div>
 		</c:if>
 		<form class="form" action="#" method="post">
+			<input type="hidden" value="${categorias}"/>
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
@@ -93,7 +94,7 @@
 							<input type="radio" name="alcoolica" value="1"/>Sim
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name="alcoolica" value="0"/>Não
+							<input type="radio" name="alcoolica" value="0" checked/>Não
 						</label>
 					</div>
 				</div>

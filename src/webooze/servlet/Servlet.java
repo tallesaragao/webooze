@@ -44,6 +44,7 @@ public class Servlet extends HttpServlet {
 		vhs.put(contextoApp + "/categoriaAlterar", new CategoriaVH());
 		vhs.put(contextoApp + "/categoriaExcluir", new CategoriaVH());
 		vhs.put(contextoApp + "/bebidaForm", new CategoriaVH());
+		vhs.put(contextoApp + "/bebidaSalvar", new BebidaVH());
 	}
 		
 	@Override

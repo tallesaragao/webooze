@@ -98,7 +98,7 @@ public class CategoriaVH implements IViewHelper {
 		
 		if(uri.equals(contexto + "/categoriaSalvar")) {
 			if(object == null) {
-				String sucesso = "Categoria cadastrada com sucesso.";
+				String sucesso = "Categoria cadastrada com sucesso";
 				request.setAttribute("sucesso", sucesso);
 				request.getRequestDispatcher("WEB-INF/jsp/categoria/list.jsp").forward(request, response);
 				return;

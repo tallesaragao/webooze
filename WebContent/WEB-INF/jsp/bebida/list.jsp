@@ -13,7 +13,7 @@
 <body>
 	<c:import url="../cabecalho.jsp"/>
 	<div class="container">
-		<h1 class="page-header titulo">Lista de categorias</h1>
+		<h1 class="page-header titulo">Lista de bebidas</h1>
 		<c:if test="${sucesso != null}">
 			<div class="row">
 				<div class="col-md-5">

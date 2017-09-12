@@ -5,13 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import webooze.dao.BebidaDAO;
 import webooze.dao.CategoriaDAO;
 import webooze.dao.IDAO;
+import webooze.modelo.Bebida;
 import webooze.modelo.Categoria;
 import webooze.modelo.EntidadeDominio;
 import webooze.negocio.IStrategy;
 import webooze.negocio.impl.ComplementarDtCadastro;
+import webooze.negocio.impl.GerarDataValidade;
+import webooze.negocio.impl.ValidarCamposBebida;
 import webooze.negocio.impl.ValidarCamposCategoria;
+import webooze.negocio.impl.VerificarValidade;
 
 public class Fachada implements IFachada {
 
@@ -26,6 +31,9 @@ public class Fachada implements IFachada {
 	public Fachada() {
 		ComplementarDtCadastro compDtCad = new ComplementarDtCadastro();
 		ValidarCamposCategoria valCampCat = new ValidarCamposCategoria();
+		ValidarCamposBebida valCampBeb = new ValidarCamposBebida();
+		GerarDataValidade gerarDtVal = new GerarDataValidade();
+		VerificarValidade verificVal = new VerificarValidade();
 
 		List<IStrategy> lSalvarCat = new ArrayList<IStrategy>();
 		lSalvarCat.add(compDtCad);
@@ -37,18 +45,36 @@ public class Fachada implements IFachada {
 		List<IStrategy> lExcluirCat = new ArrayList<IStrategy>();
 		
 		List<IStrategy> lConsultarCat = new ArrayList<IStrategy>();
+		
+		List<IStrategy> lSalvarBeb = new ArrayList<IStrategy>();
+		lSalvarBeb.add(valCampBeb);
+		lSalvarBeb.add(gerarDtVal);
+		lSalvarBeb.add(verificVal);
+		lSalvarBeb.add(compDtCad);
+		
+		List<IStrategy> lAlterarBeb = new ArrayList<IStrategy>();
+		List<IStrategy> lExcluirBeb = new ArrayList<IStrategy>();
+		List<IStrategy> lConsultarBeb = new ArrayList<IStrategy>();
 
 		Map<String, List<IStrategy>> contextoCat = new HashMap<String, List<IStrategy>>();
 		contextoCat.put(SALVAR, lSalvarCat);
 		contextoCat.put(ALTERAR, lAlterarCat);
 		contextoCat.put(EXCLUIR, lExcluirCat);
 		contextoCat.put(CONSULTAR, lConsultarCat);
+		
+		Map<String, List<IStrategy>> contextoBeb = new HashMap<String, List<IStrategy>>();
+		contextoBeb.put(SALVAR, lSalvarBeb);
+		contextoBeb.put(ALTERAR, lAlterarBeb);
+		contextoBeb.put(EXCLUIR, lExcluirBeb);
+		contextoBeb.put(CONSULTAR, lConsultarBeb);
 
 		requisitos = new HashMap<String, Map<String, List<IStrategy>>>();
 		requisitos.put(Categoria.class.getName(), contextoCat);
+		requisitos.put(Bebida.class.getName(), contextoBeb);
 		
 		daos = new HashMap<String, IDAO>();
 		daos.put(Categoria.class.getName(), new CategoriaDAO());
+		daos.put(Bebida.class.getName(), new BebidaDAO());
 	}
 
 	@Override

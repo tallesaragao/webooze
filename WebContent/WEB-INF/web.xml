@@ -61,6 +61,11 @@
     <url-pattern>/bebidaForm</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaSalvar</url-pattern>
+  </servlet-mapping>
+  
   <resource-ref>
     <description>WeboozeDB</description>
     <res-ref-name>jdbc/webooze</res-ref-name>
