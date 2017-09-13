@@ -63,7 +63,32 @@
   
   <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaList</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaEdit</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
     <url-pattern>/bebidaSalvar</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaConsultar</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaAlterar</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/bebidaExcluir</url-pattern>
   </servlet-mapping>
   
   <resource-ref>

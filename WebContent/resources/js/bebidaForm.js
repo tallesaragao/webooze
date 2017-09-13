@@ -1,9 +1,12 @@
-$(function (){
-	$.ajax({
-		type: 'GET',
-		url: 'categoriaConsultar?operacao=CONSULTAR&ajax=true&busca=',
-		success: function(data) {
-			console.log('I have friends!', data);
-		}
-	});
+$(function(){
+    $('input[type=radio][name=alcoolica]').change(function() {
+        if (this.value == '1') {
+            $('#teorAlcool').attr('disabled', false);
+        }
+        else {
+        	$('#teorAlcool').val("");
+        	$('#teorAlcool').attr('disabled', true);
+        }
+    });
 });
+	

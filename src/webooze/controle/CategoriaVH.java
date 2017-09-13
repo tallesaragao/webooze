@@ -75,11 +75,6 @@ public class CategoriaVH implements IViewHelper {
 			request.getRequestDispatcher("WEB-INF/jsp/categoria/form.jsp").forward(request, response);			
 		}
 		
-		if(uri.equals(contexto + "/bebidaForm")) {
-			BebidaVH bebidaVH = new BebidaVH();
-			bebidaVH.setView(object, request, response);
-		}
-		
 		if(uri.equals(contexto + "/categoriaForm")) {
 			request.getRequestDispatcher("WEB-INF/jsp/categoria/form.jsp").forward(request, response);	
 		}
@@ -113,7 +108,7 @@ public class CategoriaVH implements IViewHelper {
 		
 		if(uri.equals(contexto + "/categoriaConsultar")) {
 			if(object == null) {
-				String erro = "Nenhuma categoria encontrado";
+				String erro = "Nenhuma categoria encontrada";
 				request.setAttribute("erro", erro);
 				request.getRequestDispatcher("WEB-INF/jsp/categoria/list.jsp").forward(request, response);
 				return;

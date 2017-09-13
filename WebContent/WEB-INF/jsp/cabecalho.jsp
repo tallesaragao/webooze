@@ -18,14 +18,9 @@
 			<div id="menu-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="categoriaList">Categoria</a></li>
-					<li><a id="linkBebida">Bebida</a></li>
+					<li><a href="bebidaList">Bebida</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 </header>
-<script>
-	var element = document.getElementById('linkBebida');
-	var url = "bebidaForm?operacao=CONSULTAR&busca=";
-	element.setAttribute("href", url);
-</script>

@@ -17,7 +17,7 @@
 	<div class="container">
 		<c:choose>
 			<c:when test="${operacao eq 'ALTERAR'}">
-				<h1 class="page-header titulo">Alteração de bebida</h1>	
+				<h1 class="page-header titulo">Alteração de bebida</h1>
 			</c:when>
 			<c:otherwise>
 				<h1 class="page-header titulo">Cadastro de bebida</h1>				
@@ -38,7 +38,6 @@
 			</div>
 		</c:if>
 		<form class="form" action="#" method="post">
-			<input type="hidden" value="${categorias}"/>
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
@@ -50,7 +49,8 @@
 				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
 						<label for="dataFabricacao" class="control-label">Data de Fabricação</label>
-						<input type="date" name="dataFabricacao" class="form-control"/>
+						<input type="date" name="dataFabricacao" class="form-control"
+						value="<fmt:formatDate value="${bebida.dataFabricacao}" pattern="yyyy-MM-dd"/>"/>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-4">
@@ -58,7 +58,14 @@
 						<label for="categoria" class="control-label">Categoria</label>
 						<select name="categoria" class="form-control">
 							<c:forEach items="${categorias}" var="cat">
-								<option value="${cat.id}">${cat.nome}</option>
+								<c:choose>
+									<c:when test="${bebida.categoria.id eq cat.id}">
+										<option value="${cat.id}" selected>${cat.nome}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${cat.id}">${cat.nome}</option>
+									</c:otherwise>									
+								</c:choose>
 							</c:forEach>
 						</select>
 					</div>
@@ -82,44 +89,67 @@
 				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
 						<label for="preco" class="control-label">Preço (R$)</label>						
-						<input type="number" step="0.01" name="preco" class="form-control"/>
+						<input type="number" step="0.01" name="preco" value="${bebida.preco}" class="form-control"/>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-2">
 					<label for="radios" class="control-label">Alcoólica?</label>
-					<div name="radios" class="form-group">
-						<label class="radio-inline">
-							<input type="radio" name="alcoolica" value="1"/>Sim
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="alcoolica" value="0" checked/>Não
-						</label>
-					</div>
+					<c:choose>
+						<c:when test="${bebida.alcoolica eq true}">
+							<div name="radios" class="form-group">
+								<label class="radio-inline">
+									<input type="radio" name="alcoolica" value="1" checked/>Sim
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="alcoolica" value="0"/>Não
+								</label>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div name="radios" class="form-group">
+								<label class="radio-inline">
+									<input type="radio" name="alcoolica" value="1"/>Sim
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="alcoolica" value="0" checked/>Não
+								</label>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="form-group">
-						<label for="teorAlcool" class="control-label">Teor Alcoólico (%)</label>						
-						<input type="number" step="any" name="teorAlcool" class="form-control"/>
+						<label for="teorAlcool" class="control-label">Teor Alcoólico (%)</label>
+						<c:choose>
+							<c:when test="${bebida.alcoolica eq true}">
+								<input type="number" step="any" name="teorAlcool" id="teorAlcool"
+								value="${bebida.teorAlcool}" class="form-control"/>
+							</c:when>
+							<c:otherwise>
+								<input type="number" step="any" name="teorAlcool" id="teorAlcool"
+								class="form-control" disabled/>
+							</c:otherwise>
+						</c:choose>						
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-2">
 					<div class="form-group">
 						<label for="quantidadeAtual" class="control-label">Quantidade</label>						
-						<input type="number" name="quantidadeAtual" class="form-control"/>
-					</div>
-				</div>
-				<div class="col-xs-12 col-md-2">
-					<div class="form-group">
-						<label for="quantidadeMaxima" class="control-label">Quantidade Máxima</label>						
-						<input type="number" name="quantidadeMaxima" class="form-control"/>
+						<input type="number" name="quantidadeAtual" value="${bebida.estoque.quantidadeAtual}" class="form-control"/>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-2">
 					<div class="form-group">
 						<label for="quantidadeMinima" class="control-label">Quantidade Minima</label>						
-						<input type="number" name="quantidadeMinima" class="form-control"/>
+						<input type="number" name="quantidadeMinima" value="${bebida.estoque.quantidadeMinima}" class="form-control"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-2">
+					<div class="form-group">
+						<label for="quantidadeMaxima" class="control-label">Quantidade Máxima</label>						
+						<input type="number" name="quantidadeMaxima" value="${bebida.estoque.quantidadeMaxima}" class="form-control"/>
 					</div>
 				</div>
 			</div>
@@ -127,7 +157,7 @@
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group">
 						<label for="ingredientes" class="control-label">Ingredientes</label>
-						<textarea name="ingredientes" rows="4" class="form-control"></textarea>
+						<textarea name="ingredientes" rows="4" class="form-control">${bebida.ingredientes}</textarea>
 					</div>
 				</div>
 			</div>		

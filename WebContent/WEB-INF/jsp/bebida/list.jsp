@@ -50,15 +50,15 @@
 								<input type="text" name="busca" placeholder="Faça sua busca" class="form-control"/>
 								<div class="input-group-btn">
 									<button type="submit" class="btn btn-md btn-primary btn-icone"
-									name="operacao" value="CONSULTAR" formaction="categoriaConsultar">
+									name="operacao" value="CONSULTAR" formaction="bebidaConsultar">
 										<span class="glyphicon glyphicon-search"></span>
 									</button>
 								</div>
 							</div>
 						</div>
 						<div class="col-xs-2 col-md-3 btn-adicionar">			  	
-							<button class="btn btn-primary btn-icone" type="submit" formaction="categoriaForm"
-							data-toggle="tooltip" title="Adicionar categoria">
+							<button class="btn btn-primary btn-icone" type="submit" formaction="bebidaForm"
+							data-toggle="tooltip" title="Adicionar bebida">
 								<span class="glyphicon glyphicon-plus"></span>
 							</button>
 						</div>
@@ -74,26 +74,28 @@
 								<thead>
 									<tr>
 										<th>NOME</th>
-										<th>VALIDADE</th>
+										<th>FORNECEDOR</th>
+										<th>CATEGORIA</th>
 										<th>
 											<span class="glyphicon glyphicon-cog icone-engrenagem"></span> AÇÕES
 										</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${consulta}" var="c">
+									<c:forEach items="${consulta}" var="bebida">
 										<tr>
-											<td>${c.nome}</td>
-											<td>${c.diasValidade} dias</td>
+											<td>${bebida.nome}</td>
+											<td>${bebida.fornecedor}</td>
+											<td>${bebida.categoria.nome}</td>
 											<td>
 												<button type="submit" data-toggle="tooltip" title="Editar"
 												class="btn btn-sm btn-default btn-icone" method="get"
-												formaction="categoriaEdit?operacao=CONSULTAR&id=${c.id}">
+												formaction="bebidaEdit?operacao=CONSULTAR&id=${bebida.id}">
 													<span class="glyphicon glyphicon-pencil"></span>
 												</button>
 												<button type="submit" name="operacao" method="get" data-toggle="tooltip"
 												title="Excluir" value="EXCLUIR"	onclick="return excluir()"
-												class="btn btn-sm btn-danger botao-excluir btn-icone" formaction="categoriaExcluir?id=${c.id}">
+												class="btn btn-sm btn-danger botao-excluir btn-icone" formaction="bebidaExcluir?id=${bebida.id}">
 													<span class="glyphicon glyphicon-trash"></span>
 												</button>
 											</td>

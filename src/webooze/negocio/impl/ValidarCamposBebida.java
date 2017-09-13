@@ -35,8 +35,8 @@ public class ValidarCamposBebida implements IStrategy {
 		if(bebida.isAlcoolica() && bebida.getTeorAlcool() <= 0) {
 			sb.append("Informe corretamente o teor de álcool da bebida:");
 		}
-		if(estoque.getQuantidadeAtual() < 0 || estoque.getQuantidadeMaxima() < 0 || estoque.getQuantidadeMinima() < 0) {
-			sb.append("Quantidades devem ser positivas:");
+		if(estoque.getQuantidadeAtual() < 0 || estoque.getQuantidadeMaxima() <= 0 || estoque.getQuantidadeMinima() < 0) {
+			sb.append("Quantidades inválidas:");
 		}
 		else {
 			if(estoque.getQuantidadeAtual() < estoque.getQuantidadeMinima() || estoque.getQuantidadeAtual() > estoque.getQuantidadeMaxima()) {
