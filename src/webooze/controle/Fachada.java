@@ -53,6 +53,10 @@ public class Fachada implements IFachada {
 		lSalvarBeb.add(compDtCad);
 		
 		List<IStrategy> lAlterarBeb = new ArrayList<IStrategy>();
+		lAlterarBeb.add(valCampBeb);
+		lAlterarBeb.add(gerarDtVal);
+		lAlterarBeb.add(verificVal);
+		
 		List<IStrategy> lExcluirBeb = new ArrayList<IStrategy>();
 		List<IStrategy> lConsultarBeb = new ArrayList<IStrategy>();
 

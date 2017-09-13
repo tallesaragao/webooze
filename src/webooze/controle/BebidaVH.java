@@ -101,7 +101,16 @@ public class BebidaVH implements IViewHelper {
 				bebida.setIngredientes(ingredientes);
 			}
 			if(operacao.equals(CONSULTAR)) {
+				String busca = request.getParameter("busca");
+				String id = request.getParameter("id");
 				bebida.setNome("");
+				if(busca != null && !busca.equals("")) {
+					bebida.setNome(busca);
+				}
+				if(id != null && !id.equals("")) {
+					bebida.setId(Long.valueOf(id));
+				}
+				
 			}
 			if(operacao.equals(EXCLUIR)) {
 				String id = request.getParameter("id");
@@ -181,6 +190,11 @@ public class BebidaVH implements IViewHelper {
 		
 		if(uri.equals(contexto + "/bebidaAlterar")) {
 			if (object != null) {
+				Categoria categoria = new Categoria();
+				categoria.setNome("");
+				CategoriaDAO dao = new CategoriaDAO();
+				List<EntidadeDominio> categorias = dao.consultar(categoria);
+				request.setAttribute("categorias", categorias);
 				String mensagem = (String) object;
 				String[] mensagens = mensagem.split(":");
 				Bebida bebida = (Bebida) this.getEntidade(request);

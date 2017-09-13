@@ -123,7 +123,7 @@
 					<div class="form-group">
 						<label for="teorAlcool" class="control-label">Teor Alcoólico (%)</label>
 						<c:choose>
-							<c:when test="${bebida.alcoolica eq true}">
+							<c:when test="${bebida.alcoolica == true}">
 								<input type="number" step="any" name="teorAlcool" id="teorAlcool"
 								value="${bebida.teorAlcool}" class="form-control"/>
 							</c:when>
@@ -164,7 +164,7 @@
 			<div class="row">
 				<c:choose>
 					<c:when test="${operacao eq 'ALTERAR'}">
-						<input type="hidden" name="id" value="${categoria.id}"/>
+						<input type="hidden" name="id" value="${bebida.id}"/>
 						<div class="form-group col-xs-1">
 							<button type="submit" name="operacao" value="ALTERAR"
 							formaction="bebidaAlterar" class="btn btn-primary">
@@ -182,7 +182,7 @@
 					</c:otherwise>
 				</c:choose>
 				<div class="form-group col-xs-1 col-xs-offset-2 col-sm-offset-1 col-md-offset-0">
-					<a href="categoriaList" class="btn btn-default">Cancelar</a>
+					<a href="bebidaList" class="btn btn-default">Cancelar</a>
 				</div>
 			</div>
 		</form>

@@ -69,13 +69,17 @@
 			<c:if test="${not empty consulta}">
 				<div class="row">
 					<div class="table-responsive tabela-clientes">
-						<div class="col-sm-11 col-sm-7 col-md-5">
+						<div class="col-sm-11 col-sm-7 col-md-8">
 							<table class="table table-striped table-condensed">
 								<thead>
 									<tr>
 										<th>NOME</th>
-										<th>FORNECEDOR</th>
 										<th>CATEGORIA</th>
+										<th>FORNECEDOR</th>
+										<th>FABRICAÇÃO</th>
+										<th>VALIDADE</th>
+										<th>QUANTIDADE</th>
+										<th>PREÇO (R$)</th>
 										<th>
 											<span class="glyphicon glyphicon-cog icone-engrenagem"></span> AÇÕES
 										</th>
@@ -85,8 +89,12 @@
 									<c:forEach items="${consulta}" var="bebida">
 										<tr>
 											<td>${bebida.nome}</td>
-											<td>${bebida.fornecedor}</td>
 											<td>${bebida.categoria.nome}</td>
+											<td>${bebida.fornecedor}</td>
+											<td>${bebida.dataFabricacao}</td>
+											<td>${bebida.dataValidade}</td>
+											<td>${bebida.estoque.quantidadeAtual}</td>
+											<td>${bebida.preco}</td>											
 											<td>
 												<button type="submit" data-toggle="tooltip" title="Editar"
 												class="btn btn-sm btn-default btn-icone" method="get"

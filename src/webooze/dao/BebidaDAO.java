@@ -14,7 +14,7 @@ import webooze.modelo.EntidadeDominio;
 import webooze.modelo.Estoque;
 
 public class BebidaDAO implements IDAO {
-	
+
 	private Connection conexao;
 	private ConnectionFactory factory = new ConnectionFactory();
 
@@ -32,7 +32,7 @@ public class BebidaDAO implements IDAO {
 			ps.execute();
 			Long idEstoque = null;
 			ResultSet estoqueKeys = ps.getGeneratedKeys();
-			while(estoqueKeys.next()) {
+			while (estoqueKeys.next()) {
 				idEstoque = estoqueKeys.getLong(1);
 			}
 			ps.close();
@@ -59,12 +59,10 @@ public class BebidaDAO implements IDAO {
 			ps.execute();
 			ps.close();
 			return true;
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}
-		finally {
+		} finally {
 			try {
 				conexao.close();
 			} catch (SQLException e) {
@@ -81,23 +79,38 @@ public class BebidaDAO implements IDAO {
 			Bebida bebidaOld = (Bebida) consulta.get(0);
 			conexao = factory.getConnection();
 			String sql = "update bebida set nome=?, data_fabricacao=?, data_validade=?, fornecedor=?, fabricante=?, preco=?, "
-							+ "alcoolica=?, teor_alcool=?, consumivel=?, ingredientes=?, data_cadastro=? where id_categoria=?";
+					+ "alcoolica=?, teor_alcool=?, consumivel=?, ingredientes=?, id_categoria=? where id_bebida=?";
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, bebida.getNome());
 			Date dataSql = new Date(bebida.getDataFabricacao().getTime());
 			ps.setDate(2, dataSql);
-			dataSql = new Date(bebida.getDataFabricacao().getTime());
-			ps.setDate(2, dataSql);
-			ps.setLong(3, bebida.getId());
+			dataSql = new Date(bebida.getDataValidade().getTime());
+			ps.setDate(3, dataSql);
+			ps.setString(4, bebida.getFornecedor());
+			ps.setString(5, bebida.getFabricante());
+			ps.setDouble(6, bebida.getPreco());
+			ps.setBoolean(7, bebida.isAlcoolica());
+			ps.setDouble(8, bebida.getTeorAlcool());
+			ps.setBoolean(9, bebida.isConsumivel());
+			ps.setString(10, bebida.getIngredientes());
+			ps.setLong(11, bebida.getCategoria().getId());
+			ps.setLong(12, bebida.getId());
+			ps.execute();
+			ps.close();
+			sql = "update estoque set quantidade_atual=?, quantidade_minima=?, "
+					+ "quantidade_maxima=? where id_estoque=?";
+			ps = conexao.prepareStatement(sql);
+			ps.setLong(1, bebida.getEstoque().getQuantidadeAtual());
+			ps.setLong(2, bebida.getEstoque().getQuantidadeMinima());
+			ps.setLong(3, bebida.getEstoque().getQuantidadeMaxima());
+			ps.setLong(4, bebidaOld.getEstoque().getId());
 			ps.execute();
 			ps.close();
 			return true;
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}
-		finally {
+		} finally {
 			try {
 				conexao.close();
 			} catch (SQLException e) {
@@ -112,23 +125,21 @@ public class BebidaDAO implements IDAO {
 		try {
 			Bebida bebida = (Bebida) entidade;
 			conexao = factory.getConnection();
-			String sql = "select * from bebida "
-						+ "join categoria on (bebida.id_categoria = categoria.id_categoria) "
-						+ "join estoque on(bebida.id_estoque = estoque.id_estoque) "
-						+ "where bebida.nome like ?";
-			if(bebida.getId() != null) {
+			String sql = "select * from bebida " + "join categoria on (bebida.id_categoria = categoria.id_categoria) "
+					+ "join estoque on(bebida.id_estoque = estoque.id_estoque) where bebida.nome like ?";
+			if (bebida.getId() != null) {
 				sql += " and id_bebida = ?";
 			}
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			if(bebida.getNome() == null) {
+			if (bebida.getNome() == null) {
 				bebida.setNome("");
 			}
 			ps.setString(1, "%" + bebida.getNome() + "%");
-			if(bebida.getId() != null) {
+			if (bebida.getId() != null) {
 				ps.setLong(2, bebida.getId());
 			}
-			ResultSet rs = ps.executeQuery();		
-			while(rs.next()) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
 				Bebida bebidaConsultada = new Bebida();
 				bebidaConsultada.setId(rs.getLong("bebida.id_bebida"));
 				bebidaConsultada.setNome(rs.getString("bebida.nome"));
@@ -142,29 +153,28 @@ public class BebidaDAO implements IDAO {
 				bebidaConsultada.setConsumivel(rs.getBoolean("bebida.consumivel"));
 				bebidaConsultada.setIngredientes(rs.getString("bebida.ingredientes"));
 				bebidaConsultada.setDataCadastro(rs.getDate("bebida.data_cadastro"));
-				
+
 				Categoria categoriaConsultada = new Categoria();
 				categoriaConsultada.setId(rs.getLong("categoria.id_categoria"));
 				categoriaConsultada.setDataCadastro(rs.getDate("categoria.data_cadastro"));
 				categoriaConsultada.setNome(rs.getString("categoria.nome"));
 				categoriaConsultada.setDiasValidade(rs.getInt("categoria.dias_validade"));
-				
+
 				Estoque estoqueConsultado = new Estoque();
 				estoqueConsultado.setId(rs.getLong("estoque.id_estoque"));
 				estoqueConsultado.setQuantidadeAtual(rs.getLong("estoque.quantidade_atual"));
 				estoqueConsultado.setQuantidadeMinima(rs.getLong("estoque.quantidade_minima"));
 				estoqueConsultado.setQuantidadeMaxima(rs.getLong("estoque.quantidade_maxima"));
 				estoqueConsultado.setDataCadastro(rs.getDate("bebida.data_cadastro"));
-				
+
 				bebidaConsultada.setCategoria(categoriaConsultada);
 				bebidaConsultada.setEstoque(estoqueConsultado);
-				
+
 				bebidas.add(bebidaConsultada);
 			}
-			ps.close();	
+			ps.close();
 			conexao.close();
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return bebidas;
